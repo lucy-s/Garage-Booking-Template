@@ -1,4 +1,5 @@
  <?php
+include 'scripts/auth.php';
 include 'scripts/upload.php';
 ?>
 
@@ -6,19 +7,21 @@ include 'scripts/upload.php';
 <head>
       <head>
     <meta charset="utf-8">
+    <!--Bootstrap viewport settings for mobile first devlopment-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="mot full service half service tyres exhausts brakes repairs">
+    <meta name="description" content="garage booking website template mot full service half service tyres exhausts brakes repairs">
     <meta name="author" content="Shane Lucy">
     <title>Services</title>
 
-    
+    <!--Bootstrap css-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
     <!-- Custom styles for this template -->
-    <link href="scripts/styles.php" type="text/css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="scripts/styles.css" rel="stylesheet">
+
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light navbar-expand-sm">
+    <nav class="navbar navbar-expand-sm">
       <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -41,54 +44,85 @@ include 'scripts/upload.php';
             </li>
           </ul>
         </div>
-          <form class="form-inline my-2 my-lg-0 justify-content-end">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+           <ul class="navbar-nav">
+      <li class="nav-item">
+              <a class="nav-link justify-content-end" href="account.php">Account</a>
+            </li> 
+            <!--This is just for layout purposes-->
+            <li class="nav-item">
+            <a class="nav-link justify-content-end">|</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link justify-content-end" href="scripts/logout.php">Logout</a>
+            </li>
+            </ul>
       </div>
     </nav>
+    <br>
     
-    <!-- Form for uploading image to this webpage-->
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data" id="uploadServices">
-        <input type="file" name="image" data-toggle="tooltip" title="Click here to select an image" id="inputServices">
-        <button type="submit" name="uploadImg" class="btn btn-outline-success" id="btnUploadServices" data-toggle="tooltip" title="Click here to upload your image">Upload</button>
-        <button class="btn btn-outline-success" id="btnImageServices" data-toggle="tooltip" title="Saved changes can't be undone">Save Images</button>
-        <button class="btn btn-outline-success" id="btnNoneServices" data-toggle="tooltip" title="Clicking me cant be undone">I dont want an Image</button>
-        <!--outputs the relevant php error message-->
-        <span><?php echo $message;?></span>
-    </form>
+ 
+ 
     
         <!-- Setting up bootstrap grid using rows and colums for layout-->
- <div class="container">
- <div class="row" id="imgServices">
- <div class="col-sm-12"
- <!--image source is the image thats just been uploaded-->
-
-<img src="images/<?php echo $imageName;?>" style="max-width: 100%">
-</div>
+ <div class="container"> 
+  <div class="row">
+ <h1> Services</h1>
  </div>
-    <div class="row">
-        <div class="col">
-            <h1 contenteditable="true" id="servicesHeading" data-toggle="tooltip" title="Click Here To Edit Title">Services</h1>
-        </div>
-        <button class="btn btn-outline-success" id="btnServicesHeading" data-toggle="tooltip" title="Saved Changes cant be Undone">Save Heading</button>
-        </div>
+  
         
+        
+ 
         <div class="row">
             <div class="col">
-                <p contenteditable="true" id="servicesContent" data-toggle="tooltip" title="Click here to edit page content">Content goes here</p>
-                <button class="btn btn-outline-success" id="btnServicesContent" data-toggle="tooltip" title="Saved Changes cant be Undone">Save Content</button>
+                <p>Content goes here  <br>  Lorem ipsum dolor sit amet, ne eam vide quas aliquam, eos ei aperiri prompta, tota gloriatur temporibus eam ex. Vel viris vocibus epicuri ea. In nec sale labore, eirmod regione definiebas ex quo. Nam et impetus meliore. Ea case dicta theophrastus eum. Cum sale menandri an. Mei no tation nonumy sapientem. Pro no epicuri accusamus signiferumque, commodo constituto quo et, paulo omnes pri at. Sed ne impedit referrentur. Eam et dicunt sanctus fabellas, senserit consulatu torquatos est cu. Saepe possit sententiae at vel, ut mel soleat quaeque atomorum. Graece denique intellegam pro in, vel tibique dignissim an, vix nonumy tempor percipitur ex. Solum simul an pro.</p>
+                
+               
             </div>
-            
+           
         </div>
+ 
+ <div class="row">
+ <div class="col-sm-12" id="carousel">
+ 
+ <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100" src="images/cambelt.jpg" alt="Changing cambelt timing belt">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100" src="images/modified.jpg" alt="modified car front mount intercooler">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+ </div>
+ 
+ </div>
+ 
+ </div>
+ 
+
+    </div>
     </div>
     
-    
-    <script src="scripts/dynamicContent.js"></script>
+         
     
     
     <!--Bootstrap jQuery, popper and javascript scripts -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script src="scripts/additional$.js"></script>
 </body>
