@@ -1,20 +1,25 @@
  <?php
+include 'scripts/auth.php';
 include 'scripts/upload.php';
+include 'scripts/downloads.php';
+include 'scripts/booking.php';
 ?>
 
 <!DOCTYPE html>
 <head>
     <head>
     <meta charset="utf-8">
+    <!--Bootstrap viewport settings for mobile first devlopment-->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="local mechnaics friendly service competitve prices quality work">
+    <meta name="description" content="garage template booking website local mechnaics friendly service competitve prices quality work">
     <meta name="author" content="Shane Lucy">
     <title>Homepage</title>
 
-    
+    <!-- Bootstrap css-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
     <!-- Custom styles for this page -->
-    <link href="styles.php" type="text/css" rel="stylesheet">
+    <link href="scripts/styles.css" rel="stylesheet">
  
 </head>
 <body>
@@ -28,7 +33,7 @@ include 'scripts/upload.php';
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-    <nav class="navbar navbar-light bg-light navbar-expand-sm">
+    <nav class="navbar navbar-expand-sm">
       <div class="container">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -51,67 +56,127 @@ include 'scripts/upload.php';
             </li>
           </ul>
         </div>
-          <form class="form-inline my-2 my-lg-0 justify-content-end">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+          <ul class="navbar-nav">
+      <li class="nav-item">
+              <a class="nav-link justify-content-end" href="account.php">Account</a>
+            </li> 
+            <!--This is just for layout purposes-->
+            <li class="nav-item">
+            <a class="nav-link justify-content-end">|</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link justify-content-end" href="scripts/logout.php">Logout</a>
+            </li>
+            </ul>
       </div>
     </nav>
     <br>
 
-    <!-- Form for uploading image to this webpage-->
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data" id="uploadHome">
-        <input type="file" name="image" data-toggle="tooltip" title="Click here to select an image" id="inputHome">
-        <button type="submit" name="uploadImg" class="btn btn-outline-success" id="btnUploadHome" data-toggle="tooltip" title="Click here to upload your image">Upload</button>
-        <button class="btn btn-outline-success" id="btnImageHome" data-toggle="tooltip" title="Saved changes can't be undone">Save Images</button>
-        <button class="btn btn-outline-success" id="btnNoneHome" data-toggle="tooltip" title="Clicking me cant be undone">I dont want an Image</button>
-        <!--outputs the relevant php error message-->
-        <span><?php echo $message;?></span>
-    </form>
-    
+ 
    
 
 
 <!-- Setting up bootstrap grid using rows and colums for layout-->
  <div class="container">
- <div class="row" id="imgHome">
- <div class="col-sm-12"
- <!--image source is the image thats just been uploaded-->
-
-<img src="images/<?php echo $imageName;?>" style="max-width: 100%">
-</div>
- </div>
+ 
     <div class="row">
         <div class="col">
-            <h1 contenteditable="true" id="homeHeading" data-toggle="tooltip" title="Click Here To Edit Title">Homepage</h1>
+            <h1>Homepage</h1>
+            <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+
+<button type="submit" class="btn btn-primary" name="Download" data-toggle="tooltip" title="This button won't be present in your download">Download Website</button>
+</form>
         </div>
-        <button class="btn btn-outline-success" id="btnHomeHeading" data-toggle="tooltip" title="Saved Changes can't be undone">Save Heading</button>
         </div>
         
+ 
         <div class="row">
             <div class="col">
-                <p contenteditable="true" id="homeContent" data-toggle="tooltip" title="Click here to edit page content">Content goes here</p>
-                <button class="btn btn-outline-success" id="btnHomeContent" data-toggle="tooltip" title="Saved Changes cant be Undone">Save Content</button>
+                <p>Content goes here  <br>  Lorem ipsum dolor sit amet, ne eam vide quas aliquam, eos ei aperiri prompta, tota gloriatur temporibus eam ex. Vel viris vocibus epicuri ea. In nec sale labore, eirmod regione definiebas ex quo. Nam et impetus meliore. Ea case dicta theophrastus eum. Cum sale menandri an. Mei no tation nonumy sapientem. Pro no epicuri accusamus signiferumque, commodo constituto quo et, paulo omnes pri at. Sed ne impedit referrentur. Eam et dicunt sanctus fabellas, senserit consulatu torquatos est cu. Saepe possit sententiae at vel, ut mel soleat quaeque atomorum. Graece denique intellegam pro in, vel tibique dignissim an, vix nonumy tempor percipitur ex. Solum simul an pro.</p>
                 
-                <input type="color" id="colorpicker" />
-               <span> <?php echo $backgroundColour;?></span>
+
+               
+               
+               <!--Booking Form-->
+               <div class="jumbotron">
+  <h3>Book an Appointment for your vehicle:</h3>
+  <label>* Indicates a Required Field</label>
+   <!--Post method used to prevent form data from appearing in the URL & htmlspecialchars to prevent XSS-->
+              <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>"> 
+              <div class="form-row">
+                      <div class="col">
+                          <div class="form-group">   
+        <label for="numberPlate">Number Plate: *</label>
+        <input type="text" class="form-control" id="numberPlate" placeholder="Number Plate" data-toggle="tooltip" title="May only contain letters numbers and spaces" name="numberPlate" value="<?php echo $numberPlate; ?>">
+         <span><?php echo $errors[numberPlate];?></span>
+
+
+        </div>
+        </div>
+
+        <div class="col"><div class="form-group">
+        <label for="date">Appointment Date: *</label>
+        <input type="date" class="form-control" id="date" placeholder="Appointment Date" name="date" value="<?php echo $dateOfAppointment; ?>">
+         <span><?php echo $errors[date];?></span>
+
+        </div>
+                      </div>
+                      </div>
+              
+              <div class="form-row">
+              <div class="col">
+              <div class="form-group">
+                          <label for="time">Appointment Time: *</label>
+        <input type="time" class="form-control" id="time" placeholder="Appointment Time"  name="time" value="<?php echo $timeOfAppointment; ?>">
+                 <span><?php echo $errors[time];?></span>
+                          
+
+
+        </div>
+
+        </div>
+        <div class="col">
+                          <div class="form-group">
+        <label for="fault">Description of Fault: *</label> <br>
+        <textarea rows="4" cols="50" name="fault" data-toggle="tooltip" title="May only contain letters spaces , and '" placeholder="Enter a description of your fault here"></textarea>
+                 <span><?php echo $errors[fault];?></span>
+
+                          
+                          </div>
+                          </div>
+
+              
+              </div>
+                                       <button type="submit" class="btn btn-primary" name="Booking">Submit</button>
+                                        <span><?php echo $message;?></span>
+
+
+              </form>
+              </div> <br>
+                               
             </div>
-            <div class="col-sm-3">
-            <input id="profileInput" placeholder="Paste facebook url here">
-            <button class="btn btn-outline-success" id="submitFB">Update Facebook Profile</button>
-            <div class="fb-page" data-href="https://www.facebook.com/FacebookUK/?ref=br_rs&brand_redir=20531316728" data-tabs="timeline,messages" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div>
-            </div>
+                                                            <!-- Insert your facebook url here-->                                  <!--Delete these to remove from widget-->
+            <div class="fb-page col-sm-3" data-href="https://www.facebook.com/FacebookUK/?ref=br_rs&brand_redir=20531316728" data-tabs="timeline,events,messages" data-small header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                  <!-- Insert your facebook url here-->                                     
+            <blockquote cite="https://www.facebook.com/facebook" class="fb-xfbml-parse-ignore">
+             <!-- Insert your facebook url here-->     <!--Insert profile name here-->
+            <a href="https://www.facebook.com/facebook">Facebook</a></blockquote></div>
+           
         </div>
     </div>
+    </div>
     
-    
-    
-
+         
     
     
     <!--Bootstrap jQuery, popper and javascript scripts -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="scripts/dynamicContent.js"></script>
+
+
+<script src="scripts/additional$.js"></script>
+
+
+
 </body>
